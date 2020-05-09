@@ -20,7 +20,7 @@ class _ChapterState extends State<Chapter> {
       MaterialPageRoute(builder: (context) => SelectionScreen()),
     );
     setState(() {
-      if (result) value = result;
+      if (result != null) value = result;
     });
   }
 
