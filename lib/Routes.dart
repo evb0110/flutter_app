@@ -9,7 +9,7 @@ class MainRoute extends StatelessWidget {
     // Navigator.pop on the Selection Screen.
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SelectionScreen()),
+      MaterialPageRoute(builder: (context) => SelectionScreen('Chapter')),
     );
     return result;
   }

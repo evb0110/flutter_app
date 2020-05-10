@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SelectionScreen extends StatelessWidget {
+  final String value;
+  SelectionScreen(this.value);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose chapter'),
+        title: Text('Choose $value'),
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -13,16 +16,16 @@ class SelectionScreen extends StatelessWidget {
           RaisedButton(
             onPressed: () {
               // Close the screen and return "Yep!" as the result.
-              Navigator.pop(context, 'Chapter 1');
+              Navigator.pop(context, '$value 1');
             },
-            child: Text('Chapter 1'),
+            child: Text('$value 1'),
           ),
           RaisedButton(
             onPressed: () {
               // Close the screen and return "Nope!" as the result.
-              Navigator.pop(context, 'Chapter 2');
+              Navigator.pop(context, '$value 2');
             },
-            child: Text('Chapter 2'),
+            child: Text('$value 2'),
           ),
         ],
       ),
