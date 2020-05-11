@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutterapp/data.dart';
 
 import 'SelectionScreen.dart';
 
@@ -11,7 +12,8 @@ class Chapter extends StatefulWidget {
 class _ChapterState extends State<Chapter> {
   final String entityType = 'Book';
   final String partType = 'Chapter';
-  final chooseButtonColor = Colors.lightBlue;
+  final chooseButtonColor = Colors.blue;
+  final buttonTextStyle = TextStyle(color: Colors.white, fontSize: 20.0);
   String value = 'Book';
 
   Future<String> nextRoute(BuildContext context) async {
@@ -30,25 +32,32 @@ class _ChapterState extends State<Chapter> {
       appBar: AppBar(
         actions: <Widget>[
           RaisedButton(
-            child: Text('Choose $entityType'),
+            child: Text(
+              '$entityType',
+              style: buttonTextStyle,
+            ),
             onPressed: () => nextRoute(context),
             color: chooseButtonColor,
           ),
           RaisedButton(
-            child: Text('Choose $partType'),
+            child: Text(
+              '$partType',
+              style: buttonTextStyle,
+            ),
             onPressed: () => nextRoute(context),
             color: chooseButtonColor,
           ),
         ],
-        title: Text(value),
+        title: Text(value,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.lightGreenAccent)),
       ),
       body: Container(
         padding: EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
         child: Center(
             child: ListView(
           children: List<int>.generate(40, (i) => i + 100)
-              .map((v) => Verse(v,
-                  'ܡܢ ܟܠܗܝܢ ܗܠܝܢ ܣܓܼܝܬ ܚܟܡܬܐ ܘܥܼܫܢܬ ܗܝܡܢܘܬܐ܂ ܡܢ ܠܩܘܕܡܝܢ ' * 3))
+              .map((v) => Verse(v, syrdata))
               .toList(),
         )),
       ),
@@ -69,7 +78,14 @@ class Verse extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(child: Text(text, textAlign: TextAlign.right)),
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.right,
+              textScaleFactor: 3.0,
+              style: TextStyle(fontFamily: 'SertoMardin'),
+            ),
+          ),
           SizedBox(
             width: 29.0,
             child: Align(
