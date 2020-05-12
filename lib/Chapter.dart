@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutterapp/data.dart';
+import 'package:flutterapp/makeListFromChapter.dart';
 
 import 'SelectionScreen.dart';
 
@@ -28,6 +28,9 @@ class _ChapterState extends State<Chapter> {
 
   @override
   Widget build(BuildContext context) {
+    var chapter = 'mark_1';
+    var list = makeListFromChapter(chapter);
+
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -56,9 +59,10 @@ class _ChapterState extends State<Chapter> {
         padding: EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
         child: Center(
             child: ListView(
-          children: List<int>.generate(40, (i) => i + 100)
-              .map((v) => Verse(v, syrdata))
-              .toList(),
+          children: list,
+//          children: List<int>.generate(40, (i) => i + 100)
+//              .map((v) => Verse(v, syrdata))
+//              .toList(),
         )),
       ),
     );
@@ -66,8 +70,8 @@ class _ChapterState extends State<Chapter> {
 }
 
 class Verse extends StatelessWidget {
-  int number;
-  String text;
+  final int number;
+  final String text;
   Verse(this.number, this.text);
 
   @override
@@ -82,7 +86,7 @@ class Verse extends StatelessWidget {
             child: Text(
               text,
               textAlign: TextAlign.right,
-              textScaleFactor: 3.0,
+              textScaleFactor: 2.5,
               style: TextStyle(fontFamily: 'SertoMardin'),
             ),
           ),
