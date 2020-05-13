@@ -10,13 +10,11 @@ class Chapter extends StatefulWidget {
 }
 
 class _ChapterState extends State<Chapter> {
-  final String entityType = 'Book';
-  final String partType = 'Chapter';
   final chooseButtonColor = Colors.blue;
   final buttonTextStyle = TextStyle(color: Colors.white, fontSize: 20.0);
-  String value = 'Book';
+  String value = 'Matthew';
 
-  Future<String> nextRoute(BuildContext context) async {
+  Future<String> nextRoute(BuildContext context, entityType) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SelectionScreen(entityType)),
@@ -36,18 +34,18 @@ class _ChapterState extends State<Chapter> {
         actions: <Widget>[
           RaisedButton(
             child: Text(
-              '$entityType',
+              'Book',
               style: buttonTextStyle,
             ),
-            onPressed: () => nextRoute(context),
+            onPressed: () => nextRoute(context, 'book'),
             color: chooseButtonColor,
           ),
           RaisedButton(
             child: Text(
-              '$partType',
+              'Chapter',
               style: buttonTextStyle,
             ),
-            onPressed: () => nextRoute(context),
+            onPressed: () => nextRoute(context, 'chapter'),
             color: chooseButtonColor,
           ),
         ],
