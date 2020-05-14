@@ -85,7 +85,7 @@ class Verse extends StatelessWidget {
         children: <Widget>[
           Expanded(
               child: SafeArea(
-            minimum: const EdgeInsets.only(left: 20.0),
+            minimum: const EdgeInsets.only(left: 30.0),
             child: Text(
               text,
               textAlign: TextAlign.right,
