@@ -52,7 +52,8 @@ class _ChapterState extends State<Chapter> {
             color: chooseButtonColor,
           ),
           RaisedButton(
-            child: Text('Chapter', style: buttonTextStyle),
+            child:
+                Text('Chapter', style: buttonTextStyle, textScaleFactor: 0.9),
             onPressed: () => nextRoute(context, 'chapter'),
             color: chooseButtonColor,
           ),
@@ -83,20 +84,22 @@ class Verse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
+              child: SafeArea(
+            minimum: const EdgeInsets.only(left: 20.0),
             child: Text(
               text,
               textAlign: TextAlign.right,
               textScaleFactor: 2.5,
               style: TextStyle(fontFamily: 'SertoMardin', height: 1.3),
             ),
-          ),
+          )),
           SizedBox(
             width: 29.0,
             child: Container(
                 padding: EdgeInsets.only(top: 15.0),
                 child: Align(
                   child: Text(
-                    '$number',
+                    number == 0 ? '' : '$number',
                     textAlign: TextAlign.right,
                     textScaleFactor: 1.2,
                     style: TextStyle(color: Colors.blue),

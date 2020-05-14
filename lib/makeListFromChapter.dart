@@ -4,9 +4,12 @@ import 'package:flutterapp/makePeshittaObject.dart';
 List<Verse> makeListFromChapter(chapter) {
   var peshittaObject = makePeshittaObject();
   var chapterObject = peshittaObject[chapter];
-  return chapterObject['text'].map<Verse>((line) {
+  var head = Verse(0, chapterObject['head']);
+  var verses = chapterObject['text'].map<Verse>((line) {
     int number = int.parse(line['number']);
     String verse = line['verse'];
     return Verse(number, verse);
   }).toList();
+  verses.insert(0, head);
+  return verses;
 }
