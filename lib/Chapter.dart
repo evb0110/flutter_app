@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutterapp/makeChapterString.dart';
 import 'package:flutterapp/makeListFromChapter.dart';
 
 import 'SelectionScreen.dart';
@@ -11,57 +12,58 @@ class Chapter extends StatefulWidget {
 
 class _ChapterState extends State<Chapter> {
   final chooseButtonColor = Colors.blue;
-  final buttonTextStyle = TextStyle(color: Colors.white, fontSize: 20.0);
-  String value = 'Matthew';
+  final buttonTextStyle =
+      TextStyle(color: Colors.lightGreenAccent, fontSize: 20.0);
+  String book = 'Matthew';
+  int chapter = 1;
 
-  Future<String> nextRoute(BuildContext context, entityType) async {
+  void nextRoute(BuildContext context, entityType) async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SelectionScreen(entityType)),
+      MaterialPageRoute(
+          builder: (context) => SelectionScreen(book, entityType)),
     );
+    print(result);
+
     setState(() {
-      if (result != null) value = result;
+      if (result == null) return;
+      if (result.length < 3) {
+        chapter = int.parse(result);
+      } else {
+        if (book != result) {
+          book = result;
+          chapter = 1;
+        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var chapter = 'mark_1';
-    var list = makeListFromChapter(chapter);
+    var chapterString = makeChapterString(book, chapter);
+    var list = makeListFromChapter(chapterString);
 
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           RaisedButton(
-            child: Text(
-              'Book',
-              style: buttonTextStyle,
-            ),
+            child: Text('Book', style: buttonTextStyle, textScaleFactor: 0.9),
             onPressed: () => nextRoute(context, 'book'),
             color: chooseButtonColor,
           ),
           RaisedButton(
-            child: Text(
-              'Chapter',
-              style: buttonTextStyle,
-            ),
+            child: Text('Chapter', style: buttonTextStyle),
             onPressed: () => nextRoute(context, 'chapter'),
             color: chooseButtonColor,
           ),
         ],
-        title: Text(value,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.lightGreenAccent)),
+        title: Text('$book $chapter',
+            textScaleFactor: 1.1,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
       ),
       body: Container(
         padding: EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
-        child: Center(
-            child: ListView(
-          children: list,
-//          children: List<int>.generate(40, (i) => i + 100)
-//              .map((v) => Verse(v, syrdata))
-//              .toList(),
-        )),
+        child: Center(child: ListView(children: list)),
       ),
     );
   }
@@ -85,15 +87,22 @@ class Verse extends StatelessWidget {
               text,
               textAlign: TextAlign.right,
               textScaleFactor: 2.5,
-              style: TextStyle(fontFamily: 'SertoMardin'),
+              style: TextStyle(fontFamily: 'SertoMardin', height: 1.3),
             ),
           ),
           SizedBox(
             width: 29.0,
-            child: Align(
-              child: Text('$number', textAlign: TextAlign.right),
-              alignment: Alignment.topRight,
-            ),
+            child: Container(
+                padding: EdgeInsets.only(top: 15.0),
+                child: Align(
+                  child: Text(
+                    '$number',
+                    textAlign: TextAlign.right,
+                    textScaleFactor: 1.2,
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  alignment: Alignment.topRight,
+                )),
           ),
         ],
       ),

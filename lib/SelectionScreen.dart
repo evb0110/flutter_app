@@ -4,16 +4,23 @@ import 'package:flutterapp/bibleBooks.dart';
 import 'makeButtonWrap.dart';
 
 class SelectionScreen extends StatelessWidget {
-  final String value;
-  SelectionScreen(this.value);
+  final String book;
+  final String entity;
+  SelectionScreen(this.book, this.entity);
 
   @override
   Widget build(BuildContext context) {
     var list = bibleBooks.map((b) => b['book']).toList();
 
+    if (entity == 'chapter') {
+      int count =
+          bibleBooks.firstWhere((element) => element['book'] == book)['count'];
+      list = List<int>.generate(count, (index) => index + 1);
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose $value'),
+        title: Text('Choose $entity'),
       ),
       body: makeButtonWrap(context, list),
     );
