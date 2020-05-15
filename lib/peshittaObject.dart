@@ -1,8 +1,9 @@
 import 'package:flutterapp/peshitta.dart';
 
+var peshittaObject = makePeshittaObject();
+
 makePeshittaObject() {
-  var chapters = peshitta.split('=====\n').toList();
-  var object = {};
+  List<String> chapters = peshitta.split('=====\n').toList();
   var chaptersObject = chapters
       .map((ch) => ch.split('\n'))
       .where((c) => c.length > 3)
@@ -24,8 +25,10 @@ makePeshittaObject() {
     };
   }).toList();
 
-  chaptersObject.forEach((element) {
-    object.addAll(element);
+  return chaptersObject.fold({}, (acc, val) {
+    var newAcc = {};
+    newAcc.addAll(acc);
+    newAcc.addAll(val);
+    return newAcc;
   });
-  return object;
 }
