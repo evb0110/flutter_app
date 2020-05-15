@@ -1,8 +1,8 @@
-import 'package:flutterapp/Chapter.dart';
-import 'package:flutterapp/makePeshittaObject.dart';
+import 'package:flutterapp/peshittaObject.dart';
+
+import 'Verse.dart';
 
 List<Verse> makeListFromChapter(chapter) {
-  var peshittaObject = makePeshittaObject();
   var chapterObject = peshittaObject[chapter];
   var head = Verse(0, chapterObject['head']);
   var verses = chapterObject['text'].map<Verse>((line) {

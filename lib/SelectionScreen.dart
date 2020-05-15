@@ -22,7 +22,7 @@ class SelectionScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Choose $entity'),
       ),
-      body: makeButtonWrap(context, list),
+      body: makeButtonWrap(context, list, entity),
     );
   }
 }
