@@ -8,6 +8,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Peshitta',
-        home: Chapter(),
+        home: Chapter('Matthew', 1),
       );
 }

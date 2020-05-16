@@ -6,16 +6,18 @@ import 'makeButtonWrap.dart';
 class SelectionScreen extends StatelessWidget {
   final String book;
   final String entity;
+
   SelectionScreen(this.book, this.entity);
 
   @override
   Widget build(BuildContext context) {
-    var list = bibleBooks.map((b) => b['book']).toList();
+    List<String> list;
 
     if (entity == 'chapter') {
-      int count =
-          bibleBooks.firstWhere((element) => element['book'] == book)['count'];
-      list = List<int>.generate(count, (index) => index + 1);
+      int count = bibleBookCounts[book];
+      list = List<String>.generate(count, (index) => (index + 1).toString());
+    } else {
+      list = bibleBooks.map<String>((b) => b.book).toList();
     }
 
     return Scaffold(

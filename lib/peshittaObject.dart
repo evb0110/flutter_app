@@ -4,10 +4,7 @@ var peshittaObject = makePeshittaObject();
 
 makePeshittaObject() {
   List<String> chapters = peshitta.split('=====\n').toList();
-  var chaptersObject = chapters
-      .map((ch) => ch.split('\n'))
-      .where((c) => c.length > 3)
-      .map((lines) {
+  var chaptersObject = chapters.map((ch) => ch.split('\n')).where((c) => c.length > 3).map((lines) {
     var chap = lines[0];
     var head = lines[1];
     var text = lines
@@ -25,10 +22,5 @@ makePeshittaObject() {
     };
   }).toList();
 
-  return chaptersObject.fold({}, (acc, val) {
-    var newAcc = {};
-    newAcc.addAll(acc);
-    newAcc.addAll(val);
-    return newAcc;
-  });
+  return chaptersObject.fold({}, (acc, val) => {}..addAll(acc)..addAll(val));
 }

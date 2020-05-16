@@ -1,4 +1,10 @@
-var bibleBooks = [
+class BookInfo {
+  final String book;
+  final int count;
+  BookInfo(this.book, this.count);
+}
+
+final List<BookInfo> bibleBooks = [
   {'book': 'Matthew', 'count': 28},
   {'book': 'Mark', 'count': 16},
   {'book': 'Luke', 'count': 24},
@@ -26,4 +32,7 @@ var bibleBooks = [
   {'book': '3 John', 'count': 1},
   {'book': 'Jude', 'count': 1},
   {'book': 'Revelation', 'count': 22},
-];
+].map((el) => BookInfo(el['book'], el['count'])).toList();
+
+final bibleBookCounts =
+    bibleBooks.fold({}, (acc, el) => {}..addAll(acc)..addAll({el.book: el.count}));
