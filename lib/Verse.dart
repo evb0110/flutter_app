@@ -3,27 +3,23 @@ import 'package:flutter/material.dart';
 class Verse extends StatelessWidget {
   final int number;
   final String text;
-  bool isTitle;
-  Verse(this.number, this.text) {
-    isTitle = number == 0;
-  }
+
+  Verse(this.number, this.text);
 
   @override
   Widget build(BuildContext context) {
+    final bool isTitle = number == 0;
     return Container(
       padding: EdgeInsets.only(bottom: 15.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextBox(text, isTitle),
-          NumberBox(number),
-        ],
+        children: [textBox(text, isTitle), numberBox(number)],
       ),
     );
   }
 }
 
-Widget TextBox(String text, isTitle) => Expanded(
+Widget textBox(String text, isTitle) => Expanded(
       child: SafeArea(
         minimum: const EdgeInsets.only(left: 50.0),
         child: Text(
@@ -39,8 +35,8 @@ Widget TextBox(String text, isTitle) => Expanded(
       ),
     );
 
-Widget NumberBox(int number) {
-  bool isTitle = number == 0;
+Widget numberBox(int number) {
+  final bool isTitle = number == 0;
   if (isTitle) return Container();
   return SizedBox(
     width: 25.0,
